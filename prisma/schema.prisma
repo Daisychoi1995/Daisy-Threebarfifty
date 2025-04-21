@@ -14,10 +14,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model menu_item {
+model MenuItem {
   id          Int      @id @default(autoincrement()) @map("id")
   name        String   @map("name")
   description String   @map("description")
   price       Float    @map("price")
   image_url   String   @map("imageUrl")
+}
+
+model ContactUs {
+  id          Int      @id @default(autoincrement()) @map("id")
+  name        String   @map("name")
+  description String   @map("description")
+  email        String   @map("email")
+  subject String   @map("subject")
+  created_at    DateTime @map("createdAt")
 }

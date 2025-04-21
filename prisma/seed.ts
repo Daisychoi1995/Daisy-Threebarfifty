@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 //  imageUrl: "https://res.cloudinary.com/da40xszl3/image/upload/<optional_transformation>/Main-Cake_leby0z"
 async function main() {
-  await prisma.menu_item.createMany({
+  await prisma.menuItem.createMany({
     data: [
       {
         name: 'Brûlée basque cheesecake',
@@ -15,6 +15,17 @@ async function main() {
           'https://res.cloudinary.com/da40xszl3/image/upload/Main-Cake_leby0z',
       },
     ],
+  })
+  await prisma.contactUs.createMany({
+    data: [
+      {
+        name: "Daisy Choi",
+        description: "How much is each cookie?",
+        email: "chj15937@gmail.com",
+        subject: "Cookie Price",
+        created_at: new Date(),
+      }
+    ]
   })
   console.log('✅ Seeded projects successfully!')
 }

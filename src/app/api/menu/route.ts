@@ -6,7 +6,7 @@ const prisma = new PrismaClient
 
 export async function GET() {
   try {
-    const result = await prisma.menu_item.findMany();
+    const result = await prisma.menuItem.findMany();
     const menuItems = result.map(({ image_url, ...rest }: MenuItemPrisma) => ({
       ...rest,
       imageUrl: image_url,

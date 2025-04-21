@@ -1,7 +1,7 @@
 'use client'
 
 import { db } from '@/lib/firebase/config'
-import { ContactUs } from '@/models/Model'
+import { ContactUs } from '@/app/models/Model'
 import { addDoc, collection } from '@firebase/firestore'
 import { useState } from 'react'
 
@@ -11,7 +11,7 @@ const ContactUsForm = () => {
     email: '',
     subject: '',
     description: '',
-    date: new Date(),
+    createdAt: new Date(),
   })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,15 +29,23 @@ const ContactUsForm = () => {
     }
 
     try {
-      await addDoc(collection(db, 'contactUs'), form)
-      alert('Submitted!')
-      setForm({
-        name: '',
-        email: '',
-        subject: '',
-        description: '',
-        date: new Date(),
+      const res = await fetch('/api/contact-us', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
       })
+      if (res.ok) {
+        alert('Form submitted successfully!')
+        setForm({
+          name: '',
+          email: '',
+          subject: '',
+          description: '',
+          createdAt: new Date(),
+        })
+      }
     } catch (error) {
       console.error('Error submitting contactUs', error)
     }

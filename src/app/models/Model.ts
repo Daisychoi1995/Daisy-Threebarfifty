@@ -12,7 +12,7 @@ export interface MenuItemPrisma {
 }
 
 export interface MenuItem {
-  id: string
+  id: number
   name: string
   description: string
   price: number
@@ -25,12 +25,20 @@ export interface MenuItemDraft {
   imageUrl: string
 }
 
+export interface ContactUsPrisma {
+  name: string
+  email: string
+  subject: string
+  description: string
+  created_at: Date
+}
+
+
 export interface ContactUs {
   name: string
   email: string
   subject: string
   description: string
-  date: Date
+  createdAt: Date
 }
-
 

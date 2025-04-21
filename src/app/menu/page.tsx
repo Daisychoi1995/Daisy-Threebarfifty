@@ -25,7 +25,6 @@ const Menu = () => {
         throw new Error('Failed to fetch menu items')
       }
       const data = await res.json()
-      console.log(data)
       return data
     } catch (err) {
       console.error('Error fetching menu items:', err)
@@ -45,7 +44,7 @@ const Menu = () => {
       })
   }, [])
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (id: number) => {
     try {
       const res = await fetch('/api/menu', {
         method: 'DELETE',
@@ -61,7 +60,7 @@ const Menu = () => {
     }
   }
 
-  const handleClick = (id: string) => {
+  const handleClick = (id: number) => {
     if (!id) {
       console.error('Item ID is missing')
       return
@@ -74,7 +73,6 @@ const Menu = () => {
   }
 
   const addItemToCart = useCart((state) => state.addItemToCart)
-  console.log('client', menuItems)
   return (
     <div className="p-4">
       {error && (

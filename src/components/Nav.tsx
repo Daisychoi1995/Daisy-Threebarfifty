@@ -29,10 +29,10 @@ count: state.count,
           <Link href="/menu">Menu</Link>
         </p>
         <p>
-          <Link href="/aboutUs">About us</Link>
+          <Link href="/about-us">About us</Link>
         </p>
         <p>
-          <Link href="/contactUs">Contact us</Link>
+          <Link href="/contact-us">Contact us</Link>
         </p>
         <div>
           <Link href="/cart"  className='flex flex-row'>Cart<div className='bg-[#009B64] w-8 h-8 flex items-center justify-center rounded-full text-white ml-2'>{countCartItems}</div></Link>
