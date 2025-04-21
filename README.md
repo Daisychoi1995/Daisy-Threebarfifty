@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍰 Threebarfifty - Dessert Shop App
 
-## Getting Started
+**threefifty** started as a simple dessert shop run by myself.
+At first, I built the website using Wix, but I wanted more control, better performance, and the ability to truly own what I create.
 
-First, run the development server:
+That’s when I began learning software engineering.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project marks the beginning of my journey as a developer.
+It’s not just a portfolio piece — it’s the reason I fell in love with coding.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Check out the live website: [threebarfifty.com](https://www.threebarfifty.com)
+Check out the live website made by Daisy: [threebarfifty.com](https://three-bar-fifty.firebaseapp.com/)
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
+| Category        | Stack                                 |
+|-----------------|----------------------------------------|
+| Frontend        | Next.js (App Router), TypeScript       |
+| Styling         | Tailwind CSS                           |
+| State Management| Zustand                                |
+| Backend         | Next.js API Routes                     |
+| Database        | PostgreSQL                     |
+| Hosting         | Firebase Hosting                       |
+| Authentication  | Firebase Authentication                |
+| Payment         | Stripe                                 |
+| Image Hosting   | Cloudinary                             |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Features
 
-## Deploy on Vercel
+✅ Server-Side Rendering (SSR) for item detail pages
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+✅ Zustand-based shopping cart (persistent and reactive)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+✅ Firebase backend integration (Firestore + Hosting)
+
+✅ Modular file structure and clean code architecture
+
+✅ Optimized image rendering with next/image
+
+✅ Stripe payment integration for secure transactions
+
+✅ Cloudinary image upload and management for optimized delivery
+
+---
+
+## 🛒 Cart Management
+
+- `addCart(item)`  
+  → Add or update item in the cart
+
+- `removeCart(id)`  
+  → Decrease quantity or remove item from cart
+
+- `removeItemFromCart(id)`  
+  → Remove a item from cart
+
+- `count`  
+  → Total number of items in the cart
+
+
+All cart data is persisted via `zustand/persist`.
+
+---
+
+
+
+## Contact
+
+For any questions or feedback, feel free to contact me at chj15937@gmail.com.
