@@ -1,11 +1,9 @@
 'use client'
-import UploadImage from "@/components/UploadImage"
-import { db } from "@/lib/firebase/config";
-import { collection, addDoc } from "firebase/firestore";
+import UploadImage from "@/components/UploadImage";
+import { auth } from '@/lib/firebase/config';
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '@/lib/firebase/config';
 const menuAdmin = () => {
   const [user] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -23,13 +21,18 @@ const menuAdmin = () => {
     }
 
     try {
-      const res = await fetch('/api/menu', {
+      const res = await fetch('/api/menu/admin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({name, description, price, imageUrl}),
+        body: JSON.stringify({name, description, price: parseFloat(price), imageUrl}),
       })
+      if (!res.ok) {
+        const errMsg = await res.text();
+        console.error("Server responded with:", errMsg);
+        return alert("Failed to add menu item: " + errMsg);
+      }
       if (res.ok) {
         alert("Menu item added successfully!")
         router.push('/menu')

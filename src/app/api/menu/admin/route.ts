@@ -12,13 +12,13 @@ export async function POST(req: Request) {
       data: {
         name: data.name,
         price: data.price,
-        image_url: data.subject,
+        image_url: data.imageUrl,
         description: data.description,
       },
     })
     return NextResponse.json(result, { status: 201 })
   } catch (error) {
-    return NextResponse.json({ error: 'Error fetching posts' }, { status: 500 })
+    return NextResponse.json({ error: 'Error fetching menu items' }, { status: 500 })
   } finally {
     await prisma.$disconnect()
   }
