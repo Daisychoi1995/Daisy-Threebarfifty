@@ -60,18 +60,18 @@ const Page = async ({ params }: PageProps) => {
 
 export default Page
 
-export async function generateStaticParams() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/menu`)
-    if (!res.ok) return []
+// export async function generateStaticParams() {
+//   try {
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/menu`)
+//     if (!res.ok) return []
 
-    const items = await res.json()
-
-    return items.map((item: { id: number }) => ({
-      id: item.id.toString(),
-    }))
-  } catch (error) {
-    console.error('Error generating static params:', error)
-    return []
-  }
-}
+//     const items = await res.json()
+//     console.log(items)
+//     return items.map((item: { id: number }) => ({
+//       id: item.id.toString(),
+//     }))
+//   } catch (error) {
+//     console.error('Error generating static params:', error)
+//     return []
+//   }
+// }
