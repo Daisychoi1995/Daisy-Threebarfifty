@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 
 export async function GET(
-  req: NextRequest, context: { params: { id: string } }
+  req: NextRequest, { params } : { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(context.params.id);
+    const id = parseInt((await params).id);
     if (isNaN(id)) {
       return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
     }
