@@ -5,7 +5,7 @@ import MenuItemListComponent from '@/components/MenuItemListComponent'
 import Link from 'next/link'
 
 type PageProps = {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 async function getMenuItem(id: number): Promise<MenuItem | null> {
@@ -23,22 +23,9 @@ async function getMenuItem(id: number): Promise<MenuItem | null> {
 }
 
 const Page = async ({ params }: PageProps) => {
-  const { id } = params
+  const { id } = await params
   if (!id) return <p>Item does not exist.</p>
   const menuItem = await getMenuItem(+id)
-  if (!menuItem) {
-    return (
-      <div className="text-center py-10">
-        <p className="text-red-500">Failed to load menu item</p>
-        <Link
-          href="/menu"
-          className="text-blue-500 hover:underline mt-4 inline-block"
-        >
-          Return to Menu
-        </Link>
-      </div>
-    )
-  }
   if (!menuItem) {
     return (
       <div className="text-center py-10">
