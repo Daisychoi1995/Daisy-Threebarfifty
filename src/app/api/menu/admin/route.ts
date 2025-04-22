@@ -31,14 +31,12 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(
-  req: NextRequest,
-  context: { params: { id: string } }
+  req: NextRequest, { params } : { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(context.params.id)
-
+    const id = parseInt((await params).id);
     if (isNaN(id)) {
-      return NextResponse.json({ error: 'Invalid ID' }, { status: 400 })
+      return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
     }
     const result = await prisma.menuItem.delete({ where: { id: id } })
     return NextResponse.json(result, { status: 200 })
