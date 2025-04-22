@@ -83,6 +83,7 @@ const MenuItemListComponent = ({
           <button className="cursor-pointer border-2 border-[#009B64] py-3 px-6 rounded-full font-semibold text-lg transition-all duration-300 ease-in-out hover:bg-[#009B64] hover:text-white hover:border-[#007a48] transform hover:scale-105">
             Buy now
           </button>
+
         </div>
       </div>
 

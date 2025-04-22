@@ -2,22 +2,16 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { storage } from '@/lib/firebase/config'
 
 type UploadImageProps = {
-  onUpload: (url: string) => Promise<void>;
+  onUpload: (url: string) => Promise<void>
 }
 
 export default function UploadImage({ onUpload }: UploadImageProps) {
-  // state of file
   const [file, setFile] = useState<File | null>(null)
-  // state of upload
   const [uploading, setUploading] = useState(false)
-  // state of upload URL
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null)
 
-  // set selected file depending on change
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setFile(event.target.files[0])
@@ -25,33 +19,33 @@ export default function UploadImage({ onUpload }: UploadImageProps) {
   }
 
   const handleUpload = async (): Promise<void> => {
-    // when there is no file
     if (!file) {
       alert('Oops, No selected file!')
       return
     }
 
-    // uploading
     setUploading(true)
-    const storageRef = ref(storage, `images/${file.name}`)
+
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('upload_preset', 'YOUR_UPLOAD_PRESET') // replace with your actual preset
 
     try {
-      // upload file
-      await uploadBytes(storageRef, file)
+      const response = await fetch('https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload', {
+        method: 'POST',
+        body: formData,
+      })
 
-      // get download URL
-      const url = await getDownloadURL(storageRef)
-
-      // set the uploaded URL in state
-      setUploadedUrl(url)
-
-      // call the onUpload function and pass the URL
-      await onUpload(url)
-
+      const data = await response.json()
+      if (data.secure_url) {
+        setUploadedUrl(data.secure_url)
+        await onUpload(data.secure_url)
+      } else {
+        throw new Error('No secure_url returned from Cloudinary')
+      }
     } catch (error) {
-      console.error('Error uploading the file', error)
+      console.error('Error uploading the file to Cloudinary', error)
     } finally {
-      // after everything, change uploading state
       setUploading(false)
     }
   }
@@ -59,12 +53,16 @@ export default function UploadImage({ onUpload }: UploadImageProps) {
   return (
     <div>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload} disabled={uploading} className="cursor-pointer border-2 border-[#009B64] bg-[#009B64] text-white py-3 px-6 rounded-full font-semibold text-lg transition-all duration-300 ease-in-out hover:bg-white hover:text-[#009B64] hover:border-[#007a48] transform hover:scale-105">
+      <button
+        onClick={handleUpload}
+        disabled={uploading}
+        className="cursor-pointer border-2 border-[#009B64] bg-[#009B64] text-white py-3 px-6 rounded-full font-semibold text-lg transition-all duration-300 ease-in-out hover:bg-white hover:text-[#009B64] hover:border-[#007a48] transform hover:scale-105"
+      >
         {uploading ? 'Uploading...' : 'Upload Image'}
       </button>
       {uploadedUrl && (
         <div>
-          <p >Uploaded image:</p>
+          <p>Uploaded image:</p>
           <Image
             src={uploadedUrl}
             alt="Uploaded image"

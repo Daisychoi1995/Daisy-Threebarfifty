@@ -1,9 +1,7 @@
 export const dynamic = 'force-dynamic'
 export const revalidate = 60 // Set revalidation time (optional, in seconds)
-import MenuItemListComponent from '@/components/MenuItemListComponent'
-import { db } from '@/lib/firebase/config'
 import { MenuItem } from '@/app/models/Model'
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import MenuItemListComponent from '@/components/MenuItemListComponent'
 import Link from 'next/link'
 
 type PageProps = {
@@ -12,7 +10,7 @@ type PageProps = {
 
 async function getMenuItem(id: number): Promise<MenuItem | null> {
   try {
-    const res = await fetch(`/api/menu/${id}`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/menu/1`)
       if (!res.ok) {
         throw new Error('Failed to fetch menu items')
       }
@@ -64,11 +62,14 @@ const Page = async ({ params }: PageProps) => {
 
 export default Page
 
-export async function generateStaticParams() {
-  try {
+// export async function generateStaticParams() {
+//   try {
+//     const res = await fetch('/api/menu', { method: "GET" })
+//     if(!res.ok) return []
+//     const result = res.json()
     
-  } catch (error) {
-    console.error('Error generating static params:', error)
-    return []
-  }
-}
+//   } catch (error) {
+//     console.error('Error generating static params:', error)
+//     return []
+//   }
+// }

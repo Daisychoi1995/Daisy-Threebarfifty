@@ -88,7 +88,7 @@ const Menu = () => {
             {menuItems.length} products
           </p>
           <p className="flex text-[20px] text-red-500 font-bold cursor-pointer justify-center">
-            {user && <Link href="/menu/menuAdmin">Upload Menu</Link>}
+            {user && <Link href="/menu/admin">Upload Menu</Link>}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
             {menuItems.map((item) => (

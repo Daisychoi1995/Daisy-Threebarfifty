@@ -3,7 +3,7 @@ import useCart from '@/stores/cartStore'
 import { useShallow } from 'zustand/shallow'
 
 type CartItem = {
-  id: string
+  id: number
   name: string
   price: number
   imageUrl: string
@@ -13,8 +13,8 @@ type CartState = {
   count: number
   cart: CartItem[]
   increaseItemQuantity: (item: CartItem) => void
-  decreaseItemQuantity: (id: string) => void
-  removeItemFromCart: (id: string) => void
+  decreaseItemQuantity: (id: number) => void
+  removeItemFromCart: (id: number) => void
   addItemToCart: (item: CartItem) => void
   clearCart: () => void
 }
@@ -27,7 +27,7 @@ const CheckoutButton = () => {
   // const router = useRouter()
   const handleCheckout = async () => {
     const baseUrl = typeof window === 'undefined' ? 'http://localhost' : ''
-    const res = await fetch(`${baseUrl}/api/checkout_sessions`, {
+    const res = await fetch(`${baseUrl}/api/checkout-sessions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

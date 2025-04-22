@@ -33,7 +33,6 @@ const Cart = () => {
     (sum, item) => sum + item.price * item.quantity,
     0
   )
-
   return (
     <div className="px-4 md:px-16 py-6 flex flex-col lg:flex-row gap-8">
       {isCartEmpty && (
