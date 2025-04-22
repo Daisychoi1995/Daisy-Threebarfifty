@@ -23,10 +23,22 @@ async function getMenuItem(id: number): Promise<MenuItem | null> {
 }
 
 const Page = async ({ params }: PageProps) => {
-  const { id } = await params
+  const { id } = params
   if (!id) return <p>Item does not exist.</p>
-  
   const menuItem = await getMenuItem(+id)
+  if (!menuItem) {
+    return (
+      <div className="text-center py-10">
+        <p className="text-red-500">Failed to load menu item</p>
+        <Link
+          href="/menu"
+          className="text-blue-500 hover:underline mt-4 inline-block"
+        >
+          Return to Menu
+        </Link>
+      </div>
+    )
+  }
   if (!menuItem) {
     return (
       <div className="text-center py-10">
@@ -61,14 +73,18 @@ const Page = async ({ params }: PageProps) => {
 
 export default Page
 
-// export async function generateStaticParams() {
-//   try {
-//     const res = await fetch('/api/menu', { method: "GET" })
-//     if(!res.ok) return []
-//     const result = res.json()
-    
-//   } catch (error) {
-//     console.error('Error generating static params:', error)
-//     return []
-//   }
-// }
+export async function generateStaticParams() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/menu`)
+    if (!res.ok) return []
+
+    const items = await res.json()
+
+    return items.map((item: { id: number }) => ({
+      id: item.id.toString(),
+    }))
+  } catch (error) {
+    console.error('Error generating static params:', error)
+    return []
+  }
+}
