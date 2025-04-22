@@ -13,7 +13,8 @@ export async function GET() {
     }))
     return NextResponse.json(menuItems);
   } catch (error) {
-    return NextResponse.json({ error: 'Error fetching posts' }, { status: 500 });
+    console.error("❌ Error fetching menu items:", error)
+    return NextResponse.json({ error: 'Error fetching menu items' }, { status: 500 });
   } finally {
     await prisma.$disconnect();
   }
