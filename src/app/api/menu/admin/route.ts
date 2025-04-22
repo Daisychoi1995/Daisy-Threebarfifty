@@ -1,12 +1,15 @@
-import { PrismaClient } from "@prisma/client"
-import { NextResponse } from "next/server"
+import { PrismaClient } from '@prisma/client'
+import { NextRequest, NextResponse } from 'next/server'
 
-const prisma = new PrismaClient
+const prisma = new PrismaClient()
 export async function POST(req: Request) {
   try {
     const data = await req.json()
     if (!data.name || !data.description || !data.price || !data.imageUrl) {
-      return NextResponse.json({ error: 'All fields are required' }, { status: 400 })
+      return NextResponse.json(
+        { error: 'All fields are required' },
+        { status: 400 }
+      )
     }
     const result = await prisma.menuItem.create({
       data: {
@@ -18,25 +21,33 @@ export async function POST(req: Request) {
     })
     return NextResponse.json(result, { status: 201 })
   } catch (error) {
-    return NextResponse.json({ error: 'Error fetching menu items' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'Error fetching menu items' },
+      { status: 500 }
+    )
   } finally {
     await prisma.$disconnect()
   }
-
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE(
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
   try {
-    const {id} = await req.json()
-    if (!id) {
-      return NextResponse.json({ error: `ID of ${id} dosen't exist in menu item list` }, { status: 400 })
+    const id = parseInt(context.params.id)
+
+    if (isNaN(id)) {
+      return NextResponse.json({ error: 'Invalid ID' }, { status: 400 })
     }
-    const result = await prisma.menuItem.delete({ where: {id: id }})
+    const result = await prisma.menuItem.delete({ where: { id: id } })
     return NextResponse.json(result, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ error: 'Error fetching menu items' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'Error fetching menu items' },
+      { status: 500 }
+    )
   } finally {
     await prisma.$disconnect()
   }
-
 }
