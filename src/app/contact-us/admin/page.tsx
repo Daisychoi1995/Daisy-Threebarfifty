@@ -26,7 +26,6 @@ const ContactUsAdmin = () => {
           throw new Error('Failed to fetch menu items')
         }
         const data = await res.json()
-        console.log(data)
         const formattedData = data.map((item: any) => ({
           ...item,
           createdAt: new Date(item.created_at).toLocaleString(),

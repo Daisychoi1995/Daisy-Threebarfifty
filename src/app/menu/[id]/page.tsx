@@ -10,7 +10,7 @@ type PageProps = {
 
 async function getMenuItem(id: number): Promise<MenuItem | null> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/menu/1`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/menu/${id}`)
       if (!res.ok) {
         throw new Error('Failed to fetch menu items')
       }
@@ -24,9 +24,8 @@ async function getMenuItem(id: number): Promise<MenuItem | null> {
 
 const Page = async ({ params }: PageProps) => {
   const { id } = await params
-  console.log('id',id)
   if (!id) return <p>Item does not exist.</p>
-
+  
   const menuItem = await getMenuItem(+id)
   if (!menuItem) {
     return (

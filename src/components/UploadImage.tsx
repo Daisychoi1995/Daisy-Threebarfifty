@@ -38,7 +38,6 @@ export default function UploadImage({ onUpload }: UploadImageProps) {
       })
 
       const data = await response.json()
-      console.log('Upload response:', data)
       if (data.secure_url) {
         setUploadedUrl(data.secure_url)
         await onUpload(data.secure_url)

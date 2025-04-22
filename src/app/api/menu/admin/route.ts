@@ -24,3 +24,19 @@ export async function POST(req: Request) {
   }
 
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const {id} = await req.json()
+    if (!id) {
+      return NextResponse.json({ error: `ID of ${id} dosen't exist in menu item list` }, { status: 400 })
+    }
+    const result = await prisma.menuItem.delete({ where: {id: id }})
+    return NextResponse.json(result, { status: 200 })
+  } catch (error) {
+    return NextResponse.json({ error: 'Error fetching menu items' }, { status: 500 })
+  } finally {
+    await prisma.$disconnect()
+  }
+
+}

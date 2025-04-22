@@ -4,11 +4,11 @@ import { NextResponse } from 'next/server'
 const prisma = new PrismaClient()
 
 export async function GET(
-  _req: Request,
+  req: Request,
   { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = await params
+    const { id } = params
     if (!id) {
       return NextResponse.json({ error: 'Missing ID' }, { status: 400 })
     }

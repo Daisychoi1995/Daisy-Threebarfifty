@@ -46,7 +46,7 @@ const Menu = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const res = await fetch('/api/menu', {
+      const res = await fetch('/api/menu/admin', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
