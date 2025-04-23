@@ -46,17 +46,20 @@ const Menu = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const res = await fetch('/api/menu/admin', {
+      const res = await fetch(`/api/menu/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id }),
+        }
       })
+      if (!res.ok) {
+        const error = await res.json()
+        throw new Error(error.error || 'Failed to delete')
+      }
       const data = await fetchMenuItems()
       setMenuItems(data)
     } catch (error) {
-      console.error('Error adding menu item', error)
+      console.error('Error deleting menu item', error)
     }
   }
 
