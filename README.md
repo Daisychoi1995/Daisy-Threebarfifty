@@ -8,6 +8,8 @@ That’s when I began learning software engineering.
 This project marks the beginning of my journey as a developer.
 It’s not just a portfolio piece — it’s the reason I fell in love with coding.
 
+**You can make an account to to admin! upload menu and delete menu as well!**
+
 Check out the live website: [threebarfifty.com](https://www.threebarfifty.com)
 Check out the live website made by Daisy: [threebarfifty.com](https://three-bar-fifty.firebaseapp.com/)
 ---
