@@ -1,6 +1,6 @@
 # 🍰 Threebarfifty - Dessert Shop App
 
-**threefifty** started as a simple dessert shop run by myself.
+**threebarfifty** started as a simple dessert shop run by myself.
 At first, I built the website using Wix, but I wanted more control, better performance, and the ability to truly own what I create.
 
 That’s when I began learning software engineering.
@@ -24,7 +24,7 @@ Check out the live website made by Daisy: [threebarfifty.com](https://three-bar-
 | State Management| Zustand                                |
 | Backend         | Next.js API Routes                     |
 | Database        | PostgreSQL                     |
-| Hosting         | Firebase Hosting                       |
+| Hosting         | Vercel & Railway                       |
 | Authentication  | Firebase Authentication                |
 | Payment         | Stripe                                 |
 | Image Hosting   | Cloudinary                             |
