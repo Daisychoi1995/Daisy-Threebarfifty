@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "vercel-build": "npx prisma db push && npx prisma generate && next build"
+    "vercel-build": "npx prisma db push && npx prisma generate && next build",
+    "test": "vitest --mode test"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -28,12 +29,18 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.3.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^4.4.1",
+    "jsdom": "^26.1.0",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.1.2"
   }
 }
